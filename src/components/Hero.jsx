@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import MyForm from "./Form";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function Hero() {
+  const navigate = useNavigate();
+  const userId = useSelector((state) => state.auth.userId);
   const [isFadingOut, setIsFadingOut] = useState(false);
   const [isButtonVisible, setIsButtonVisible] = useState(true);
 
@@ -30,8 +34,10 @@ export default function Hero() {
       <div className="hero-overlay bg-opacity-60"></div>
       <div className="hero-content text-neutral-content text-center">
         <div className="max-w-md">
-          <h1 className="mb-5 text-5xl font-bold">Plan Your Perfect Trip</h1>
-          <p className="mb-5">
+          <h1 className="mb-5 text-5xl text-secondary font-bold">
+            Plan Your Perfect Trip
+          </h1>
+          <p className="mb-5 text-secondary">
             Create a personalized itinerary in minutes. Just tell us your
             preferences, and we'll handle the rest.<br></br> Click the button
             below to get Started!
@@ -40,10 +46,13 @@ export default function Hero() {
             {isButtonVisible && (
               <button
                 onClick={() => {
+                  if (userId == null) {
+                    navigate("/signup");
+                  }
                   handleFadeOut();
                   setTimeout(() => setIsButtonVisible(false), 700);
                 }}
-                className={`flex items-center justify-center w-36 h-10 pt-1 transform transition-all duration-700 bg-white rounded ${
+                className={`flex items-center justify-center w-36 h-10 pt-1 transform transition-all duration-700 bg-secondary rounded ${
                   isFadingOut ? "opacity-0 translate-x-full" : ""
                 }`}
               >
