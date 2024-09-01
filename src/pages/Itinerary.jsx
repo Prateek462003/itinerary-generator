@@ -1,14 +1,24 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { clearIten } from "../redux/slices/itenerarySlice";
+import Navbar from "../components/Navbar";
 
 const Itinerary = () => {
   const iten = useSelector((state) => state.iten.data);
+  const dispatch = useDispatch();
   console.log(iten);
+
   var data = {};
   if (iten) {
     data = iten.itinerary;
   }
   const { title, budget, days } = data;
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearIten());
+    };
+  }, [dispatch]);
 
   return (
     <div>
@@ -18,7 +28,8 @@ const Itinerary = () => {
           <span className="text-xs">Please wait...</span>
         </div>
       ) : (
-        <div className="container mx-auto p-6">
+        <div className="container mx-auto">
+          <Navbar />
           <div className="flex flex-col justify-center items-center mb-5 bg-primary rounded-md p-2 ">
             <h1 className="text-2xl font-bold mb-4">{title}</h1>
             <p className="text-lg font-semibold">Budget: INR {budget}</p>

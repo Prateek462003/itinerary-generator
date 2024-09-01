@@ -40,7 +40,10 @@ const MyItineraries = () => {
   return (
     <div className="p-4 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
       {itineraries.length === 0 ? (
-        <p>No itineraries found.</p>
+        <div className="flex flex-col items-center justify-center mt-40">
+          <span className="loading loading-dots w-20"></span>
+          <span className="text-xs">Please wait...</span>
+        </div>
       ) : (
         itineraries.map((itinerary) => (
           <div
