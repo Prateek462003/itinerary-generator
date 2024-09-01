@@ -1,11 +1,19 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../redux/slices/authSlice";
 
 export default function Navbar() {
   const user = useSelector((state) => state.auth);
-  console.log("inside navbar", user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
 
   return (
     <div className="navbar bg-base-100 text-secondary">
@@ -45,7 +53,7 @@ export default function Navbar() {
       </div>
       <div className="navbar-center">
         <Link to="/">
-          <a className="btn btn-ghost text-xl">TRAVELZZ</a>
+          <span className="btn btn-ghost text-xl">TRAVELZZ</span>
         </Link>
       </div>
       <div className="navbar-end flex gap-2">
@@ -60,15 +68,23 @@ export default function Navbar() {
         )}
 
         {user.username ? (
-          <Link to="/profile">
-            <div className="avatar placeholder">
-              <div className="bg-secondary text-base-100 font-semibold w-10 rounded-full">
-                <span className="text-xl">
-                  {user.username[0].toUpperCase()}
-                </span>
+          <>
+            <Link to="/profile">
+              <div className="avatar placeholder">
+                <div className="bg-secondary text-base-100 font-semibold w-10 rounded-full">
+                  <span className="text-xl">
+                    {user.username[0].toUpperCase()}
+                  </span>
+                </div>
               </div>
-            </div>
-          </Link>
+            </Link>
+            <button
+              onClick={handleLogout}
+              className="btn btn-secondary rounded-md text-lg h-10 w-30"
+            >
+              <span className="text-sm">Logout</span>
+            </button>
+          </>
         ) : (
           <Link
             to="/login"

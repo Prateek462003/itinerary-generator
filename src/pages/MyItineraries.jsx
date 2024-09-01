@@ -9,6 +9,7 @@ const MyItineraries = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [itineraries, setItineraries] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const handleClick = (iten) => {
     dispatch(setIten({ itinerary: iten }));
@@ -32,18 +33,30 @@ const MyItineraries = () => {
         }
       } catch (error) {
         console.error("Error during itinerary fetch:", error);
+      } finally {
+        setTimeout(() => {
+          setLoading(false);
+        }, 500);
       }
     };
 
     fetchFunction();
-  }, []);
+  }, [userId]);
+
+  if (loading) {
+    return (
+      <div className="flex flex-col items-center justify-center mt-40">
+        <span className="loading loading-dots w-20"></span>
+        <span className="text-xs">Please wait...</span>
+      </div>
+    );
+  }
 
   return (
     <div className="p-4 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
       {itineraries.length === 0 ? (
-        <div className="flex flex-col items-center justify-center mt-40">
-          <span className="loading loading-dots w-20"></span>
-          <span className="text-xs">Please wait...</span>
+        <div className="flex flex-col items-center justify-center">
+          <span className="text-lg">No itineraries made till now</span>
         </div>
       ) : (
         itineraries.map((itinerary) => (
