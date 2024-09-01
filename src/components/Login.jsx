@@ -30,6 +30,7 @@ const Login = () => {
 
       if (response.ok) {
         console.log("Login successful:", data);
+        localStorage.setItem("token", data.token);
         dispatch(
           setCredentials({
             userId: data._id,

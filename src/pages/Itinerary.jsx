@@ -30,7 +30,7 @@ const Itinerary = () => {
       ) : (
         <div className="container mx-auto">
           <Navbar />
-          <div className="flex flex-col justify-center items-center mb-5 bg-primary rounded-md p-2 ">
+          <div className="flex flex-col justify-center items-center mb-5 bg-primary rounded-md p-2 mt-1">
             <h1 className="text-2xl font-bold mb-4">{title}</h1>
             <p className="text-lg font-semibold">Budget: INR {budget}</p>
           </div>

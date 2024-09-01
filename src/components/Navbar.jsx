@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 export default function Navbar() {
   const user = useSelector((state) => state.auth);
-  console.log(user);
+  console.log("inside navbar", user);
 
   return (
     <div className="navbar bg-base-100 text-secondary">
@@ -44,10 +44,12 @@ export default function Navbar() {
         </div>
       </div>
       <div className="navbar-center">
-        <a className="btn btn-ghost text-xl">TRAVELZZ</a>
+        <Link to="/">
+          <a className="btn btn-ghost text-xl">TRAVELZZ</a>
+        </Link>
       </div>
       <div className="navbar-end flex gap-2">
-        {user.username && (
+        {user.userId && (
           <Link
             to="/itineraries"
             className="btn btn-secondary rounded-md text-xl h-10 w-40"
