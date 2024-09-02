@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import MyForm from "./Form";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { IoPaperPlane } from "react-icons/io5";
 
 export default function Hero() {
   const navigate = useNavigate();
@@ -33,14 +34,14 @@ export default function Hero() {
     >
       <div className="hero-overlay bg-opacity-60"></div>
       <div className="hero-content text-neutral-content text-center">
-        <div className="max-w-md">
-          <h1 className="mb-5 text-5xl text-secondary font-bold">
+        <div className="max-w-lg">
+          <h1 className="mb-5 text-5xl text-primary font-bold">
             Plan Your Perfect Trip
           </h1>
-          <p className="mb-5 text-secondary">
+          <p className="mb-5 text-secondary-content">
             Create a personalized itinerary in minutes. Just tell us your
-            preferences, and we'll handle the rest.<br></br> Click the button
-            below to get Started!
+            preferences, and we'll handle the rest.Click the button below to get
+            Started!
           </p>
           <div className="flex align-center justify-center">
             {isButtonVisible && (
@@ -52,16 +53,18 @@ export default function Hero() {
                   handleFadeOut();
                   setTimeout(() => setIsButtonVisible(false), 700);
                 }}
-                className={`flex items-center justify-center w-36 h-10 pt-1 transform transition-all duration-700 bg-secondary rounded ${
+                className={`flex items-center justify-center w-32 gap-2 h-10 pt-1 transform transition-all duration-700 bg-base-100 text-primary rounded ${
                   isFadingOut ? "opacity-0 translate-x-full" : ""
                 }`}
               >
-                <img
+                {/* <img
                   className="rotate-12 w-12"
                   src="1.png"
                   alt="Rotating Image"
-                />
-                <span className="text-black mb-1">Start here</span>
+                /> */}
+                <IoPaperPlane />
+
+                <span className="mb-1">Start here</span>
               </button>
             )}
           </div>

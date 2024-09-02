@@ -16,7 +16,7 @@ export default function Navbar() {
   };
 
   return (
-    <div className="navbar bg-base-100 text-secondary">
+    <div className="navbar text-primary">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
@@ -37,31 +37,34 @@ export default function Navbar() {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+            className="bg-base-100 menu menu-sm dropdown-content rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
             <li>
-              <a>Homepage</a>
+              <Link to="/" target="_blank">
+                Homepage
+              </Link>
             </li>
             <li>
-              <a>Portfolio</a>
+              <Link target="_blank" to="https://www.linkedin.com/in/prateek46/">
+                Linkedin
+              </Link>
             </li>
             <li>
-              <a>About</a>
+              <Link target="_blank" to="https://github.com/Prateek462003">
+                GitHub
+              </Link>
             </li>
           </ul>
         </div>
       </div>
       <div className="navbar-center">
         <Link to="/">
-          <span className="btn btn-ghost text-xl">TRAVELZZ</span>
+          <span className="btn btn-ghost text-2xl">TRAVELZZ</span>
         </Link>
       </div>
       <div className="navbar-end flex gap-2">
         {user.userId && (
-          <Link
-            to="/itineraries"
-            className="btn btn-secondary rounded-md text-xl h-10 w-40"
-          >
+          <Link to="/itineraries" className="btn rounded-md text-xl h-10 w-40">
             <FaHome />
             <span className="text-sm">My Itineraries</span>
           </Link>
@@ -69,27 +72,30 @@ export default function Navbar() {
 
         {user.username ? (
           <>
-            <Link to="/profile">
-              <div className="avatar placeholder">
-                <div className="bg-secondary text-base-100 font-semibold w-10 rounded-full">
-                  <span className="text-xl">
-                    {user.username[0].toUpperCase()}
-                  </span>
-                </div>
+            <div className="dropdown dropdown-end btn p-0 avatar placeholder rounded-full">
+              <div
+                tabIndex={0}
+                role="button"
+                className=" text-xl font-semibold w-10 m-1"
+              >
+                {user.username[0].toUpperCase()}
               </div>
-            </Link>
-            <button
-              onClick={handleLogout}
-              className="btn btn-secondary rounded-md text-lg h-10 w-30"
-            >
-              <span className="text-sm">Logout</span>
-            </button>
+
+              <ul
+                tabIndex={0}
+                className="dropdown-content menu rounded-box z-[1] "
+              >
+                <button
+                  onClick={handleLogout}
+                  className="btn  rounded-md text-lg h-10 w-36"
+                >
+                  <span className="text-sm">Logout</span>
+                </button>
+              </ul>
+            </div>
           </>
         ) : (
-          <Link
-            to="/login"
-            className="btn btn-secondary rounded-md text-xl h-10 w-40"
-          >
+          <Link to="/login" className="btn  rounded-md text-xl h-10 w-40">
             <span className="text-sm">Login</span>
           </Link>
         )}
