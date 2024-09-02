@@ -5,6 +5,7 @@ import { setIten } from "../redux/slices/itenerarySlice";
 import Navbar from "../components/Navbar";
 
 const MyItineraries = () => {
+  const token = useSelector((state) => state.auth.token);
   const userId = useSelector((state) => state.auth.userId);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -20,9 +21,13 @@ const MyItineraries = () => {
     const fetchFunction = async () => {
       try {
         const response = await fetch(
-          `https://gen-it-backend.onrender.com/api/itenerary/getItinerariesByUser?userId=${userId}`
+          `https://gen-it-backend.onrender.com/api/itenerary/getItinerariesByUser?userId=${userId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
-
         const data = await response.json();
 
         if (response.ok) {
