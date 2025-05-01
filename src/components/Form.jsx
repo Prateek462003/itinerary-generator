@@ -28,6 +28,7 @@ const MyForm = () => {
     try {
       const dataToSend = { ...formData, userId: userId };
       navigate("/itinerary");
+      const token = localStorage.getItem("token");
       const response = await fetch(
         "https://gen-it-backend.onrender.com/api/itenerary/generateItenerary",
         {
